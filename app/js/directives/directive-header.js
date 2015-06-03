@@ -24,6 +24,17 @@ angular.module('app').directive('shipyardHeader', ['lodash', '$rootScope', 'Pers
       var insIndex = _.findIndex($rootScope.insurance.opts, 'name', Persist.getInsurance());
       $rootScope.insurance.current = $rootScope.insurance.opts[insIndex != -1? insIndex : 0];
 
+      $rootScope.discounts = {
+        opts:[
+          { name:'None', pct: 1 },
+          { name:'10%', pct: 0.9 },
+          { name:'16%', pct: 0.84 }
+        ]
+      };
+
+      $rootScope.discounts.current = $rootScope.discounts.opts[0];
+      $rootScope.discount = $rootScope.discounts.current.pct;
+
       // Close menus if a navigation change event occurs
       $rootScope.$on('$stateChangeStart',function(){
         scope.openedMenu = null;
@@ -40,6 +51,14 @@ angular.module('app').directive('shipyardHeader', ['lodash', '$rootScope', 'Pers
        */
       scope.updateInsurance = function(){
         Persist.setInsurance($rootScope.insurance.current.name);
+      };
+
+      /**
+       * Save selected insurance option
+       */
+      scope.updateDiscount = function(){
+        $rootScope.discount = $rootScope.discounts.current.pct;
+        //Persist.setDiscount($rootScope.discount);
       };
 
       scope.openMenu = function (e, menu) {

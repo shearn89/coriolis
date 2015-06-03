@@ -230,26 +230,26 @@
     <div class="header">Costs</div>
     <div class="items">
       <div class="item" ng-class="{enabled:ship.incCost}" ng-click="toggleCost(ship)">
-        <div class="lbl">{{ship.name}}</div><div class="val">{{fCrd(ship.cost)}}</div>
+        <div class="lbl">{{ship.name}}</div><div class="val">{{fCrd(ship.cost * discount)}}</div>
       </div>
       <div class="item" ng-class="{enabled:ship.bulkheads.incCost}" ng-click="toggleCost(ship.bulkheads)" ng-if="ship.bulkheads.c.cost">
-        <div class="lbl">{{ship.bulkheads.c.name}}</div><div class="val">{{fCrd(ship.bulkheads.c.cost)}}</div>
+        <div class="lbl">{{ship.bulkheads.c.name}}</div><div class="val">{{fCrd(ship.bulkheads.c.cost * discount)}}</div>
       </div>
       <div ng-repeat="c in ship.common" ng-if="c.c.cost" class="item common" ng-class="{enabled:c.incCost}" ng-click="toggleCost(c)">
-        <div class="lbl">{{c.c.class}}{{c.c.rating}} {{CArr[$index]}}</div><div class="val">{{fCrd(c.c.cost)}}</div>
+        <div class="lbl">{{c.c.class}}{{c.c.rating}} {{CArr[$index]}}</div><div class="val">{{fCrd(c.c.cost * discount)}}</div>
       </div>
       <div ng-repeat="c in ship.hardpoints" ng-if="c.c.cost" class="item hardpoints" ng-class="{enabled:c.incCost}" ng-click="toggleCost(c)">
-        <div class="lbl">{{c.c.class}}{{c.c.rating}} {{c.c.name || hgMap[c.c.grp]}}</div><div class="val">{{fCrd(c.c.cost)}}</div>
+        <div class="lbl">{{c.c.class}}{{c.c.rating}} {{c.c.name || hgMap[c.c.grp]}}</div><div class="val">{{fCrd(c.c.cost * discount)}}</div>
       </div>
       <div ng-repeat="c in ship.internal" ng-if="c.c.cost" class="item internal" ng-class="{enabled:c.incCost}" ng-click="toggleCost(c)">
-        <div class="lbl">{{c.c.class}}{{c.c.rating}} {{c.c.name || igMap[c.c.grp]}}</div><div class="val">{{fCrd(c.c.cost)}}</div>
+        <div class="lbl">{{c.c.class}}{{c.c.rating}} {{c.c.name || igMap[c.c.grp]}}</div><div class="val">{{fCrd(c.c.cost * discount)}}</div>
       </div>
     </div>
     <table>
       <thead><tr><td>Insurance</td><td>Total</td></tr></thead>
       <tbody><tr>
-        <td>{{fCrd(ship.totalCost * insurance.current.pct)}} <u>CR</u></td>
-        <td>{{fCrd(ship.totalCost)}} <u>CR</u></td>
+        <td>{{fCrd(ship.totalCost * discount * insurance.current.pct)}} <u>CR</u></td>
+        <td>{{fCrd(ship.totalCost * discount)}} <u>CR</u></td>
       </tr></tbody>
     </table>
   </div>
